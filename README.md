@@ -30,7 +30,7 @@
 - Clone the repository to your local machine:
 
 ```
-git clone https://github.com/your-username/library-management-backend.git
+git clone https://github.com/Madhavi96/library-management-backend.git
 cd library-management-backend
 ```
 
