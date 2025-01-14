@@ -24,6 +24,7 @@ public class Book {
     private String description;
     private Boolean isFavourite;
     private Integer numberOfCopies;  
+    private String urlId;
 
     @ManyToOne
     @JoinColumn(name = "author_id", nullable = false)  

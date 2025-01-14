@@ -19,7 +19,7 @@ public class AuthorService {
     @Autowired
     private AuthorMapper authorMapper;
 
-    public Author map(Long authorId) {
+    public Author getAuthorEntityById(Long authorId) {
         return authorRepository.findById(authorId)
                 .orElseThrow(() -> new RuntimeException("Author not found"));
     }
@@ -30,8 +30,7 @@ public class AuthorService {
     }
 
     public AuthorResponseDTO getAuthorById(Long id) {
-        Author author = authorRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Author not found"));
+        Author author = getAuthorEntityById(id);
         return authorMapper.toResponseDTO(author);
     }
 
@@ -50,9 +49,11 @@ public class AuthorService {
     public AuthorResponseDTO updateAuthor(Long id, AuthorRequestDTO authorRequestDTO) {
         // Convert AuthorRequestDTO to Author entity
         Author author = authorMapper.toEntity(authorRequestDTO);
+        Author exisitingAuthor =  getAuthorEntityById(id);
         
-        author = authorRepository.save(author);
         author.setId(id);
+        author.setBooks(exisitingAuthor.getBooks());
+        author = authorRepository.save(author);        
 
         // Map the updated author to a response DTO
         return authorMapper.toResponseDTO(author);

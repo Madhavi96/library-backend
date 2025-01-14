@@ -5,6 +5,7 @@ import com.example.library.dto.AuthorRequestDTO;
 import com.example.library.dto.AuthorResponseDTO;
 import com.example.library.model.Author;
 import com.example.library.model.Book;
+import com.example.library.service.BookService;
 
 import java.util.List;
 
@@ -20,10 +21,8 @@ public interface AuthorMapper {
 
     List<AssignedBookResponseDto> toAssignedBookListDTO(List<Book> book);
 
-    // Convert AuthorRequestDTO to Author entity
     Author toEntity(AuthorRequestDTO authorRequestDTO);
 
-    // Convert Author entity to AuthorResponseDTO
     AuthorResponseDTO toResponseDTO(Author author);
 
     List<AuthorResponseDTO> toResponseDTOList(List<Author> author);

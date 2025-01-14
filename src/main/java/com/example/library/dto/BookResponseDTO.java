@@ -14,5 +14,6 @@ public class BookResponseDTO {
     private String description;
     private Boolean isFavourite;
     private Integer numberOfCopies;
-    private String authorName;  // instead of authorId, we return authorName
+    private String authorName;
+    private String urlId;
 }

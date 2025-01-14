@@ -3,6 +3,7 @@ package com.example.library.mapper;
 import com.example.library.dto.AssignedBookResponseDto;
 import com.example.library.dto.BookRequestDTO;
 import com.example.library.dto.BookResponseDTO;
+import com.example.library.dto.PagedBookResponseDTO;
 import com.example.library.model.Book;
 import com.example.library.service.AuthorService;
 
@@ -21,13 +22,13 @@ public interface BookMapper {
 
     List<AssignedBookResponseDto> toAssignedBookListDTO(List<Book> book);
 
-    // Convert BookRequestDTO to Book entity
     @Mapping(source = "authorId", target = "author")
     Book toEntity(BookRequestDTO bookRequestDTO);
 
-    // Convert Book entity to BookResponseDTO
     @Mapping(source = "author.name", target = "authorName")
     BookResponseDTO toResponseDTO(Book book);
 
     List<BookResponseDTO> toResponseDTOList(List<Book> books);
+
+    PagedBookResponseDTO toPagedBookResponseDTO(long total, List<Book> books);
 }

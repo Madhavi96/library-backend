@@ -24,7 +24,7 @@ public class AuthorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AuthorResponseDTO> getAuthorById(@PathVariable Long id) {
+    public ResponseEntity<AuthorResponseDTO> getAuthorById(@PathVariable("id") Long id) {
         AuthorResponseDTO authorDTO = authorService.getAuthorById(id);
         if (authorDTO != null) {
             return ResponseEntity.ok(authorDTO);
@@ -40,7 +40,7 @@ public class AuthorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AuthorResponseDTO> updateAuthor(@PathVariable Long id, @RequestBody AuthorRequestDTO authorDTO) {
+    public ResponseEntity<AuthorResponseDTO> updateAuthor(@PathVariable("id") Long id, @RequestBody AuthorRequestDTO authorDTO) {
         AuthorResponseDTO updatedAuthor = authorService.updateAuthor(id, authorDTO);
         if (updatedAuthor != null) {
             return ResponseEntity.ok(updatedAuthor);
@@ -50,7 +50,7 @@ public class AuthorController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAuthor(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteAuthor(@PathVariable("id") Long id) {
         try {
             authorService.deleteAuthor(id);
             return ResponseEntity.noContent().build();

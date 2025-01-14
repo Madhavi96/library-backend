@@ -2,7 +2,7 @@ package com.example.library.controller;
 
 import com.example.library.dto.BookRequestDTO;
 import com.example.library.dto.BookResponseDTO;
-import com.example.library.model.Book;
+import com.example.library.dto.PagedBookResponseDTO;
 import com.example.library.service.BookService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +20,14 @@ public class BookController {
     private BookService bookService;
 
     @GetMapping
-    public List<BookResponseDTO> getAllBooks() {
-        return bookService.getAllBooks();
+    public PagedBookResponseDTO getAllBooks(
+            @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+            @RequestParam(value = "size", required = false, defaultValue = "8") Integer size) {
+        return bookService.getAllBooks(page, size);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BookResponseDTO> getBookById(@PathVariable Long id) {
+    public ResponseEntity<BookResponseDTO> getBookById(@PathVariable("id") Long id) {
         BookResponseDTO bookDTO = bookService.getBookById(id);
         if (bookDTO != null) {
             return ResponseEntity.ok(bookDTO);
@@ -41,7 +43,7 @@ public class BookController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BookResponseDTO> updateBook(@PathVariable Long id, @RequestBody BookRequestDTO bookDTO) {
+    public ResponseEntity<BookResponseDTO> updateBook(@PathVariable("id") Long id, @RequestBody BookRequestDTO bookDTO) {
         BookResponseDTO updatedBook = bookService.updateBook(id, bookDTO);
         if (updatedBook != null) {
             return ResponseEntity.ok(updatedBook);
@@ -51,7 +53,7 @@ public class BookController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteBook(@PathVariable("id") Long id) {
         try {
             bookService.deleteBook(id);
             return ResponseEntity.noContent().build();

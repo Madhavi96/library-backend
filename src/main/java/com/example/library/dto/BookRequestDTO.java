@@ -5,12 +5,12 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class BookRequestDTO {
-    
+public class BookRequestDTO {    
     private String name;
     private String genre;
     private String description;
     private Boolean isFavourite;
     private Integer numberOfCopies;
-    private Long authorId;  // authorId to associate with an Author
+    private Long authorId;
+    private String urlId;
 }
